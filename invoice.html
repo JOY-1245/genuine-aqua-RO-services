@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - Genuine Aqua RO Systems & Services</title>
+    <style>
+        :root {
+            --primary: #0e7490;
+            --primary-dark: #0f766e;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --bg-light: #f9fafb;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+            line-height: 1.5;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        /* Banner styling */
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .logo-section h1 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+
+        .logo-section p {
+            margin: 4px 0 0 0;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .invoice-title {
+            text-align: right;
+        }
+
+        .invoice-title h2 {
+            margin: 0;
+            color: var(--text-main);
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .invoice-meta {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .invoice-meta div {
+            margin-bottom: 2px;
+        }
+
+        /* Details Section */
+        .invoice-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .details-block h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+        }
+
+        .details-block p {
+            margin: 0 0 4px 0;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .details-block strong {
+            color: var(--text-main);
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            font-weight: 600;
+            text-align: left;
+            padding: 12px;
+            font-size: 14px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        td {
+            padding: 16px 12px;
+            font-size: 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        td strong {
+            color: var(--text-main);
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        /* Summary Section */
+        .invoice-summary {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 40px;
+        }
+
+        .summary-table {
+            width: 320px;
+            margin-bottom: 0;
+        }
+
+        .summary-table td {
+            padding: 8px 12px;
+            border-bottom: none;
+        }
+
+        .summary-table tr.total-row td {
+            border-top: 2px solid var(--border);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            padding-top: 12px;
+        }
+
+        /* Footer Notes */
+        .invoice-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            margin-top: 40px;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Actions block (non-printable) */
+        .actions-bar {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-light);
+        }
+
+        /* Print Media Query */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+
+            .invoice-container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+
+            .actions-bar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="actions-bar">
+        <button class="btn btn-secondary" onclick="window.print()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
+            Print Invoice / Save PDF
+        </button>
+    </div>
+
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <div class="logo-section">
+                <h1>JOY WEB BUILDER</h1>
+                <p>Custom Website Design &amp; Development</p>
+            </div>
+            <div class="invoice-title">
+                <h2>Invoice</h2>
+                <div class="invoice-meta">
+                    <div><strong>Invoice No:</strong> #GA-2026-001</div>
+                    <div><strong>Date:</strong> May 28, 2026</div>
+                    <div><strong>Due Date:</strong> Upon Receipt</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="invoice-details">
+            <div class="details-block">
+                <h3>Billed To</h3>
+                <p><strong>Genuine Aqua RO Systems and Services</strong></p>
+                <p>Tamil Nadu, India</p>
+            </div>
+            <div class="details-block">
+                <h3>Service Provider</h3>
+                <p><strong>Joy Web Builder</strong></p>
+                <p>Email: contact@joywebbuilder.com</p>
+                <p>Web Development &amp; Hosting Services</p>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 60%;">Description</th>
+                    <th class="text-right" style="width: 15%;">Qty</th>
+                    <th class="text-right" style="width: 25%;">Amount (INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>Website Landing Page Setup</strong><br>
+                        <span style="font-size: 12px; color: #6b7280; display: block; margin-top: 4px;">
+                            • High-fidelity responsive landing page with custom CSS (Outfit & Inter fonts)<br>
+                            • Lead-generation contact forms and Google Maps API coordinates integration
+                        </span>
+                    </td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">₹3,000.00</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Dynamic Products Page Integration</strong><br>
+                        <span style="font-size: 12px; color: #6b7280; display: block; margin-top: 4px;">
+                            • Interactive 24-product catalog with instant search & domestic/commercial filtering tabs
+                        </span>
+                    </td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">₹1,000.00</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Bilingual Language Localization</strong><br>
+                        <span style="font-size: 12px; color: #6b7280; display: block; margin-top: 4px;">
+                            • English & Tamil localization system with local storage preference persistence
+                        </span>
+                    </td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">₹1,000.00</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Domain Purchase &amp; Configuration Reimbursement</strong><br>
+                        <span style="font-size: 12px; color: #6b7280; display: block; margin-top: 4px;">
+                            • Custom domain registration (genuineaquatech.com) & Vercel deployment setup<br>
+                            • Includes ₹199.97 GoDaddy registration tax
+                        </span>
+                    </td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">₹2,229.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="invoice-summary">
+            <table class="summary-table">
+                <tr>
+                    <td>Subtotal:</td>
+                    <td class="text-right">₹7,229.00</td>
+                </tr>
+                <tr>
+                    <td>Taxes (Included):</td>
+                    <td class="text-right">₹199.97</td>
+                </tr>
+                <tr style="color: #10b981; font-weight: 600;">
+                    <td>Amount Paid (Advance):</td>
+                    <td class="text-right">-₹3,000.00</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Balance Due:</td>
+                    <td class="text-right">₹4,229.00</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="invoice-footer">
+            <p>Thank you for your business!</p>
+            <p style="color: #9ca3af; margin-top: 5px;">If you have any questions about this invoice, please reach out.</p>
+        </div>
+    </div>
+
+</body>
+</html>
